@@ -1,0 +1,23 @@
+{
+    "name": "ESP32_MAS",
+    "description": "3 CANNEL AUDIO PLAYER AND SEQUENZER FOR THE ESP32",
+    "keywords": "ESP32, I2S, DAC, Delta-Sigma",
+    "authors": [
+        {
+            "name": "Johannes Schreiner",
+            "email": "jojo-design@aon.at",
+            "url": "https://github.com/JohannesMTC/ESP32_MAS",
+            "maintainer": true
+        }
+    ],
+    "repository": {
+        "type": "git",
+         "url": "https://github.com/JohannesMTC/ESP32_MAS"
+    },
+    "version": "1.0",
+    "homepage": "https://github.com/JohannesMTC/ESP32_MAS",
+    "frameworks": "Arduino",
+    "examples": [
+        "examples/*/*.ino"
+    ]
+}
