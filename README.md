@@ -19,11 +19,15 @@ https://github.com/earlephilhower/ESP8266Audio
  
  The files to be played must be:
 ---------------------------------------------------------------------------------------------
-  aiff formated,
-  stored in the SPIFF,
-  Filename max 16 char
-  PCM signed 8 bit,
-  22050 sample / sec,
+*aiff formated,
+
+*stored in the SPIFF,
+
+*Filename max 16 char
+
+*PCM signed 8 bit,
+
+*22050 sample / sec,
   
 Use of the SPIFF:
 ---------------------------------------------------------------------------------------------
