@@ -1,51 +1,38 @@
-#ESP32_MAS ESP32 Model Audio System
---------------------------------------------------------------------------------------------
+# ESP32_MAS ESP32 Model Audio System [![Build Status](https://travis-ci.org/JohannesMTC/ESP32_MAS.svg?branch=master)](https://travis-ci.org/JohannesMTC/ESP32_MAS)
 
-https://github.com/JohannesMTC/ESP32_MAS.git
-  
-##3 CANNEL AUDIO PLAYER FOR THE ESP32.
----------------------------------------------------------------------------------------------
-This library allows you to play and loop sounds through a DAC or on chip DAC
-using Espressif's ESP32.
-The sound system supports 3 channels mono which can be controlled separately
-in the volume an pitch.
-The sound output is realized via Core 0. Please do not start any further tasks on Core 0,
-because this is completely exhausted with the special edition! There is no "vTaskDelay"
+## 3 Cannel audio player for the ESP32. 
+This Arduino library allows you to play, sequenz and loop sound- files through a DAC or on chip DAC using Espressif's ESP32. The sound system supports 3 channels mono which can be controlled separately in the volume and pitch. The sound output is realized via Core 0. **Please do not start any further tasks on Core 0!** *Because this is completely exhausted with the special edition.* There is no "vTaskDelay"
 within this function. The task is accessed via pointers without exception.
-The class controlling methods run on Core 1.
-Thus, calls to the class variables via pointers are also directly possible.
+
+The class controlling methods run on Core 1. Thus, calls to the class variables via pointers are also directly possible.
   
-This library is optimized for use in model and robotic construction. If you are looking for optimal sound quality or want to play MP3 or WAVE files and do without an exact loop function, please use the "esp8266audio" library from Earle F. Philhower!
+*This library is optimized for use in model and robotic construction. If you are looking for optimal sound quality or want to play MP3 or WAVE files and do without an exact loop function, please use the "esp8266audio"library from Earle F. Philhower!*
 https://github.com/earlephilhower/ESP8266Audio
  
-##The files to be played must be:
----------------------------------------------------------------------------------------------
-*aiff formated,
-
-*stored in the SPIFF,
-
-*Filename max 16 char
-
-*PCM signed 8 bit,
-
-*22050 sample / sec,
+## The files to be played must be:
+* aiff formated,
+* stored in the SPIFF,
+* filename max 16 char
+* PCM signed 8 bit,
+* 22050 sample / sec,
   
-Use of the SPIFF:
----------------------------------------------------------------------------------------------
+## Use of the SPIFF:
 Currently, the "ESP32 data upload tool" has an error. Your sketch will not have access to the files after the upload. To fix this bug, please load the example sketch "SPIFF_Test" on your ESP32 and reset the ESP32 twice! Then your sketch can easily access the files. Please note that the file name must always be complete with the path name and the file extension!
+````
 Example: "/testfile.aiff"
+````
+## Include the following libraries:  
 
-Include the following libraries:  
----------------------------------------------------------------------------------------------
-"esp_task.h",  "SPIFFS.h",  "ESP32_MAS.h"
+* "esp_task.h"
+* "SPIFFS.h"
+* "ESP32_MAS.h"
 
-In the head of your sketch:
----------------------------------------------------------------------------------------------
+## In the head of your sketch:
+
 **"ESP32_MAS()"**  Initiaise a instance of the sound system.
 
-In the "setup" function of your sketch:  
----------------------------------------------------------------------------------------------
-(Methods may only be executed before the method "ESP32_MAS.startDAC()".)
+## In the "setup" function of your sketch:  
+*Methods may only be executed before the method "ESP32_MAS.startDAC()".*
 
 **"ESP32_MAS.setPort(uint8_t * port)"** Changes the defauld port of the IS2 output.
 
