@@ -56,7 +56,7 @@ dac = sets the variable "I2S_noDAC"
 Defauld assignment:  I2S_noDAC = false
 *Allows output via an external IS2 DAC such as the "Adafruit I2S 3W Class D Amplifier".*
 ````
-## In the "setup" function of your sketch:
+## Start the sound- system:
 *Subsequent changes to the port, pin or DAC functions are no longer taken into account.*
 
 **"ESP32_MAS.startDAC()"** 
@@ -86,23 +86,31 @@ channel = channel to play the file. (0 - 2)
 filename = full path of the file to be played
 If the channel is running a file, this file will be attached to the active file.
 ```` 
-**"ESP32_MAS.outChan(uint8_t channel)"** Lets the looped channel run to end of file and stoped file output.
-
+**"ESP32_MAS.outChan(uint8_t channel)"**
+*Lets the looped channel run to end of file and stoped file output.*
+````
 channel = loop channel that should leak. (0 - 2)
-
-**"ESP32_MAS.setGain(uint8_t channel, uint8_t gain)"**  Sets the volume of the respective channel.
-
-channel = channel whose volume is to be changed. (0 - 2)  gain = desired volume (0 = mute, 255 = 1dB)
-  
+````
+**"ESP32_MAS.setGain(uint8_t channel, uint8_t gain)"**
+*Sets the volume of the respective channel.*
+````
+channel = channel whose volume is to be changed. (0 - 2)
+gain = desired volume (0 = mute, 255 = 1dB)
+````
 **"ESP32_MAS.setPitch(uint8_t channel, float pitch)"**
-
+*Sets the pitch of the respective channel.*
+````
 channel = channel whose playback speed is to be changed. (0 - 2)
-pitch = desired acceleration of the channel. (0 = 0, 1 = doubble speed)
-  
-**"ESP32_MAS.stopCan(uint8_t channel)"**  Stops the output of the channel immediately.
+pitch = desired acceleration of the channel. ((0.0 - 1.0) 0 = normal speed, 1 = double speed
+````
+**"ESP32_MAS.stopCan(uint8_t channel)"**
+*Stops the output of the channel immediately.*
+````
 channel = channel to be stopped. (0 - 2)
-  
-**"String ESP32_MAS.getCan(uint8_t channel)"**  Queries the state of the respective channel.
+````
+**"String ESP32_MAS.getCan(uint8_t channel)"**
+*Queries the state of the respective channel.*
+````
   channel = channel whose state is to be queried. (0 - 2)
   Return:
   PLAY = File ready to play and goto out.
@@ -111,13 +119,16 @@ channel = channel to be stopped. (0 - 2)
   OUT = File is being ripped off.
   STOP = No output on this channel.
   BRAKE = Channel stoped file uotput and wait for run or out.
-  
+````
 **"uint8_t ESP32_MAS.getGain(uint8_t channel)"**
-  
+*Queries the gain of the respective channel.*
+````
   channel = channel whose state is to be queried. (0 - 2)
-  Return:  Gain of the queried channel.
-  
-**"float ESP32_MAS.getPitch(uint8_t channel)**
-  
+  Return:  Gain of the queried channel. (0 - 255)
+````
+**"float ESP32_MAS.getPitch(uint8_t channel)"**
+*Queries the pitch of the respective channel.*
+````
   channel = channel whose state is to be queried. (0 - 2)
-  Return:  Pitch of the queried channel.
+  Return:  Pitch of the queried channel. (0.0 - 1.0) 0 = normal speed, 1 = double speed
+````
