@@ -1,8 +1,9 @@
-ESP32_MAS ESP32 Model Audio System
----------------------------------------------------------------------------------------------
+#ESP32_MAS ESP32 Model Audio System
+--------------------------------------------------------------------------------------------
+
 https://github.com/JohannesMTC/ESP32_MAS.git
   
-3 CANNEL AUDIO PLAYER FOR THE ESP32.
+##3 CANNEL AUDIO PLAYER FOR THE ESP32.
 ---------------------------------------------------------------------------------------------
 This library allows you to play and loop sounds through a DAC or on chip DAC
 using Espressif's ESP32.
@@ -17,7 +18,7 @@ Thus, calls to the class variables via pointers are also directly possible.
 This library is optimized for use in model and robotic construction. If you are looking for optimal sound quality or want to play MP3 or WAVE files and do without an exact loop function, please use the "esp8266audio" library from Earle F. Philhower!
 https://github.com/earlephilhower/ESP8266Audio
  
- The files to be played must be:
+##The files to be played must be:
 ---------------------------------------------------------------------------------------------
 *aiff formated,
 
