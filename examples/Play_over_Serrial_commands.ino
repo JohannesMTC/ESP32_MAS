@@ -20,9 +20,9 @@
   stored in the SPIFF
 
   Pin assignment of the DAC:
-  26 = BCK
-  25 = LRCK
-  22 = DATA
+  BCK = 26
+  WS = 25
+  DATA = 22
   ----------------------------------------------------------------------------------------------*/
 #include "esp_task.h"
 #include "SPIFFS.h"
@@ -32,7 +32,7 @@ ESP32_MAS Audio;
 bool up = true;
 float pitch = 0;
 
-void setup() {//---------------------------------------------------------------------------SETUP
+void setup() {
   Serial.begin(115200);
   Serial.println("Serial run");
   SPIFFS.begin();
@@ -43,13 +43,14 @@ void setup() {//----------------------------------------------------------------
   delay(500);
   Audio.startDAC();
   Serial.println("DAC and Setup redy");
-}// SETUP
+}
 
-void loop() {//-----------------------------------------------------------------------------LOOP
+void loop() {
 
   uint8_t income = Serial.read();
   switch (income) {
     case 48:
+      //This section responds to the entry "0". You get the state of all 3 channels as outputin the serrial monitor.
       for (int i = 0; i < 3; i++) {
         String Channel;
         uint8_t Gain;
@@ -68,21 +69,55 @@ void loop() {//-----------------------------------------------------------------
       }
       break;
     case 49:
+      //This section responds to the entry "1". It starts a file which plays the sound of a train horn and stops automatically.
       Audio.setGain(1, 150);
       Audio.playFile(1, "/makrofon.aiff");
       Serial.println("Play /makrofon.aiff");
       break;
     case 50:
+      //This section responds to the entry "2". Starts the loop on channel 0 with the quiet sound of an ICE 2.
       Audio.setGain(0, 150);
       Audio.loopFile(0, "/E_engine0.aiff");
       Serial.println("Loop /E_engine0.aiff");
       break;
     case 51:
+      //This section responds to the entry "3". Starts the loop on channel 0 with the approach sound of an ICE 2.
       Audio.setGain(0, 150);
       Audio.loopFile(0, "/E_engine1.aiff");
       Serial.println("Loop /E_engine1.aiff");
       break;
+    case 52:
+      //This section responds to the entry "4". Lets the loop run out of channel "0".
+      Audio.outChan(0);
+      Serial.println("Loop channel 0 run out.");
+      break;
+    case 53:
+      //This section responds to the entry "5"
+      Audio.outChan(0);
+      Serial.println("Loop channel 0 run out.");
+      break;
+    case 54:
+      //This section responds to the entry "6"
+      Audio.outChan(0);
+      Serial.println("Loop channel 0 run out.");
+      break;
+    case 55:
+      //This section responds to the entry "7"
+      Audio.outChan(0);
+      Serial.println("Loop channel 0 run out.");
+      break;
+    case 56:
+      //This section responds to the entry "8"
+      Audio.outChan(0);
+      Serial.println("Loop channel 0 run out.");
+      break;
+    case 57:
+      //This section responds to the entry "9"
+      Audio.outChan(0);
+      Serial.println("Loop channel 0 run out.");
+      break;
   }
+  //This section continuously changes the abscissa rate of channel 0.
   if (up) {
     pitch = pitch + 0.01;
   }
@@ -97,7 +132,8 @@ void loop() {//-----------------------------------------------------------------
   }
   Audio.setPitch(0, pitch);
   vTaskDelay(100);
-}// LOOP
+}
+
 /*Copyright (C) 2018  Johannes Schreiner Otterthal AUSTRIA
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
