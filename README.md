@@ -29,48 +29,62 @@ Example: "/testfile.aiff"
 
 ## In the head of your sketch:
 
-**"ESP32_MAS()"**  Initiaise a instance of the sound system.
+**"ESP32_MAS()"**
+*Initiaise a instance of the sound system.*
 
 ## In the "setup" function of your sketch:  
 *Methods may only be executed before the method "ESP32_MAS.startDAC()".*
 
-**"ESP32_MAS.setPort(uint8_t * port)"** Changes the defauld port of the IS2 output.
+**"ESP32_MAS.setPort(uint8_t * port)"**
+*Changes the defauld port of the IS2 output.*
+````
+port = Port 0 or 1 for the ESP_MAS
+Defauld = 0
+````
+**"ESP32_MAS.setOut(uint8_t bck, uint8_t ws, uint8_t data)"**
+*Changes the defauld pin configuration of the IS2 output.*
+````
+bck = BCK Pin
+ws = WS Pin
+data = DATA Pin
+Defauld Pin assignment:  BCK = 26,  WS = 25,  DATA = 22
+````
+**"ESP32_MAS.setDAC(bool dac)"**  
+*Switches on the internal DAC of the ESP32 to realize the sound output by means of an audio amplifier.*
+````
+dac = sets the variable "I2S_noDAC"
+Defauld assignment:  I2S_noDAC = false   Allows output via an external IS2 DAC such as the "Adafruit I2S 3W Class D Amplifier".
+````
+##In the "setup" function of your sketch:
+*Subsequent changes to the port, pin or DAC functions are no longer taken into account.*
 
-port = Port 0 or 1 for the ESP_MAS  Defauld = 0
-
-**"ESP32_MAS.setOut(uint8_t bck, uint8_t ws, uint8_t data)"**  Changes the defauld pin configuration of the IS2 output.
-
-Defauld Pin assignment of the DAC:  BCK = 26,  WS = 25,  DATA = 22
-
-**"ESP32_MAS.setDAC(bool dac)"**  Switches on the internal DAC of the ESP32 to realize the sound output by means of an audio amplifier.
-dac = true sets the variable "I2S_noDAC" = true
-
-Defauld assignment of the DAC:  I2S_noDAC = false   Allows output via an external IS2 DAC such as the "Adafruit I2S 3W Class D Amplifier".
+**"ESP32_MAS.startDAC()"** 
+*Starts the IS2 output with the predefined or defauld configuration.*
   
-In the "setup" function of your sketch:
----------------------------------------------------------------------------------------------
-(Subsequent changes to the port, pin or DAC functions are no longer taken into account.)
-
-**"ESP32_MAS.startDAC()"** Starts the IS2 output with the predefined or defauld configuration.
+##In any function:
+*Methods can be called any number of times.*
   
-In any function:
----------------------------------------------------------------------------------------------
-(Methods can be called any number of times.)
-  
-**"ESP32_MAS.setVolume(uint8_t volume)"** Sets the master volume of the output.
-
-volume = Master volume of the DAC. 0-255, 0 = mute, 255 = 0dB  Defauld assignment:  Volume = 255
-  
-**"ESP32_MAS.playFile(uint8_t channel, String filname)"**  Send a new file to the sound system for playback.
-
-channel = channel to play the file. (0 - 2)  filename = full path of the file to be played
-The output starts immediately (delay approx. 2 ms) and stops at the end of the file. If the channel is running a file, this file will be attached to the active file.
-  
-**"ESP32_MAS.loopFile(uint8_t channel, String filname)"**  Loads a file into the loop buffer and repeats it continuously.
-
-channel = channel to play the file. (0 - 2)  filename = full path of the file to be played
+**"ESP32_MAS.setVolume(uint8_t volume)"**
+*Sets the master volume of the output.*
+````
+volume = Master volume of the DAC. 0-255, 0 = mute, 255 = 0dB
+Defauld assignment:  Volume = 255
+```` 
+**"ESP32_MAS.playFile(uint8_t channel, String filname)"**
+*Send a new file to the sound system for playback.*
+````
+channel = channel to play the file. (0 - 2)
+filename = full path of the file to be played
+The output starts immediately (delay approx. 2 ms) and stops at the end of the file.
 If the channel is running a file, this file will be attached to the active file.
-  
+````  
+**"ESP32_MAS.loopFile(uint8_t channel, String filname)"**
+*Loads a file into the loop buffer and repeats it continuously.*
+````
+channel = channel to play the file. (0 - 2)
+filename = full path of the file to be played
+If the channel is running a file, this file will be attached to the active file.
+```` 
 **"ESP32_MAS.outChan(uint8_t channel)"** Lets the looped channel run to end of file and stoped file output.
 
 channel = loop channel that should leak. (0 - 2)
