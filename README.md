@@ -53,15 +53,16 @@ Defauld Pin assignment:  BCK = 26,  WS = 25,  DATA = 22
 *Switches on the internal DAC of the ESP32 to realize the sound output by means of an audio amplifier.*
 ````
 dac = sets the variable "I2S_noDAC"
-Defauld assignment:  I2S_noDAC = false   Allows output via an external IS2 DAC such as the "Adafruit I2S 3W Class D Amplifier".
+Defauld assignment:  I2S_noDAC = false
+*Allows output via an external IS2 DAC such as the "Adafruit I2S 3W Class D Amplifier".*
 ````
-##In the "setup" function of your sketch:
+## In the "setup" function of your sketch:
 *Subsequent changes to the port, pin or DAC functions are no longer taken into account.*
 
 **"ESP32_MAS.startDAC()"** 
 *Starts the IS2 output with the predefined or defauld configuration.*
   
-##In any function:
+## In any function:
 *Methods can be called any number of times.*
   
 **"ESP32_MAS.setVolume(uint8_t volume)"**
