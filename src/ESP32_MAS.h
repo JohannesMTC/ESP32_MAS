@@ -126,11 +126,11 @@
   channel = channel whose playback speed is to be changed. (0 - 2)
   pitch = desired acceleration of the channel. (0 = 0, 1 = doubble speed)
 
-  "ESP32_MAS.stopCan(uint8_t channel)"
+  "ESP32_MAS.stopChan(uint8_t channel)"
   Stops the output of the channel immediately.
   channel = channel to be stopped. (0 - 2)
 
-  "String ESP32_MAS.getCan(uint8_t channel)"
+  "String ESP32_MAS.getChan(uint8_t channel)"
   Queries the state of the respective channel.
   channel = channel whose state is to be queried. (0 - 2)
   Return:

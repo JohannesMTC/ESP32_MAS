@@ -9,7 +9,7 @@ loopFile	KEYWORD1
 outChan	KEYWORD1
 setGain	KEYWORD1
 setPitch	KEYWORD1
-stopCan	KEYWORD1
-getCan	KEYWORD2
+stopChan	KEYWORD1
+getChan	KEYWORD2
 getGain	KEYWORD2
 getPitch	KEYWORD2
