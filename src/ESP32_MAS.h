@@ -90,6 +90,9 @@
 
   "ESP32_MAS.startDAC()"
   Starts the IS2 output with the predefined or defauld configuration.
+
+  "ESP32_MAS.stopDAC()"
+  Stop I2S send-loop, shutdown I2S library.
   ---------------------------------------------------------------------------------------------
   In any function:
   (Methods can be called any number of times.)
@@ -166,6 +169,7 @@ class ESP32_MAS {
     void setOut(uint8_t bck, uint8_t ws, uint8_t data);
     void setDAC(bool dac);
     void startDAC();
+    void stopDAC();
     void setVolume(uint8_t volume);
     void stopChan(uint8_t channel);
     void playFile(uint8_t channel, String audio_file);
@@ -194,4 +198,6 @@ class ESP32_MAS {
     uint8_t Gain[3] = {128, 128, 128}; // 0-255, 0 = mute, 255 = 0dB
     float Pitch[3] = {0, 0, 0}; // 0 - 1, 0 = normal speed, 1 = double speed
 };
+
+extern bool Audio_Player_run;
 #endif
