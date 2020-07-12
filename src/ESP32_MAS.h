@@ -90,6 +90,9 @@
 
   "ESP32_MAS.startDAC()"
   Starts the IS2 output with the predefined or defauld configuration.
+
+  "ESP32_MAS.stopDAC()"
+  Stop I2S send-loop, shutdown I2S library.
   ---------------------------------------------------------------------------------------------
   In any function:
   (Methods can be called any number of times.)
@@ -158,14 +161,17 @@
 #include "driver/i2s.h"
 #include "esp_task.h"
 #include "ESP32_MAS.h"
+#include "driver/i2s.h"
 
 class ESP32_MAS {
   public:
     ESP32_MAS();
-    void setPort(uint8_t port);
+    ~ESP32_MAS() { this->stopDAC(); } // fixme: wait until thread terminated
+    void setPort(i2s_port_t port);
     void setOut(uint8_t bck, uint8_t ws, uint8_t data);
     void setDAC(bool dac);
     void startDAC();
+    void stopDAC();
     void setVolume(uint8_t volume);
     void stopChan(uint8_t channel);
     void playFile(uint8_t channel, String audio_file);
@@ -178,13 +184,13 @@ class ESP32_MAS {
     String getChan(uint8_t channel);
     uint8_t getGain(uint8_t channel);
     float getPitch(uint8_t channel);
-  private:
-    void *ptr_array[18];
+
+  
     String Audio_File[3] = {"/xxxxxxxxxxxxxxxx.aiff",
                             "/xxxxxxxxxxxxxxxx.aiff",
                             "/xxxxxxxxxxxxxxxx.aiff"
                            };
-    uint8_t I2S_PORT = 0; // PORT NUM
+    i2s_port_t I2S_PORT = I2S_NUM_0; // PORT NUM
     uint8_t I2S_BCK = 26; // BCK
     uint8_t I2S_WS = 25; // WS
     uint8_t I2S_DATA = 22; // DATA
@@ -193,5 +199,9 @@ class ESP32_MAS {
     uint8_t Channel[3] = {0, 0, 0}; // 0 = STOP, 1 = BRAKE, 2 = PLAY, 3 = LOOP, 4 = RUN, 5 = OUT
     uint8_t Gain[3] = {128, 128, 128}; // 0-255, 0 = mute, 255 = 0dB
     float Pitch[3] = {0, 0, 0}; // 0 - 1, 0 = normal speed, 1 = double speed
+
+    bool Audio_Player_run;
 };
+
+
 #endif

@@ -10,16 +10,22 @@ The class controlling methods run on Core 1. Thus, calls to the class variables 
 https://github.com/earlephilhower/ESP8266Audio
  
 ## The files to be played must be:
-* aiff formated,
+* raw format,
 * stored in the SPIFF,
 * filename max 16 char
 * PCM signed 8 bit,
 * 22050 sample / sec,
-  
+
+You can generate the files with ffmpeg. For example:
+````
+for i in *.wav ; do ffmpeg -i $i -f s8 -acodec pcm_s8 raw/$i.raw ; done
+rename .wav.raw .raw *.wav.raw
+````
+
 ## Use of the SPIFF:
 Currently, the "ESP32 data upload tool" has an error. Your sketch will not have access to the files after the upload. To fix this bug, please load the example sketch "SPIFF_Test" on your ESP32 and reset the ESP32 twice! Then your sketch can easily access the files. Please note that the file name must always be complete with the path name and the file extension!
 ````
-Example: "/testfile.aiff"
+Example: "/testfile.raw"
 ````
 ## Include the following libraries:  
 
