@@ -1,6 +1,6 @@
 # ESP32_MAS ESP32 Model Audio System
 
-## 3 Cannel audio player for the ESP32. 
+## 3 Channel audio player for the ESP32. 
 This Arduino library allows you to play, sequenz and loop sound- files through a DAC or on chip DAC using Espressif's ESP32. The sound system supports 3 channels mono which can be controlled separately in the volume and pitch. The sound output is realized via Core 0. **Please do not start any further tasks on Core 0!** *Because this is completely exhausted with the special edition.* There is no "vTaskDelay"
 within this function. The task is accessed via pointers without exception.
 
